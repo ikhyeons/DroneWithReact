@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Toggle from "./Toggle";
+import { io } from "socket.io-client";
+
+const socket = io("ws://localhost:3003");
 
 const SROLTbutton = styled.button`
   width: 150px;
@@ -55,12 +58,19 @@ const Scontroller = styled.div``;
 function Controller() {
   const [lastCommand, setLastCommand] = useState("");
 
+  useEffect(() => {
+    socket.on("backData", (arg) => {
+      console.log(arg);
+    });
+  }, []);
+
   return (
     <Scontroller>
       <div>
         <SROLTbutton
           onClick={() => {
             setLastCommand("Take Off");
+            socket.emit("frontCommand", "takeoff");
           }}
         >
           이륙
@@ -68,6 +78,7 @@ function Controller() {
         <SROLTbutton
           onClick={() => {
             setLastCommand("Land");
+            socket.emit("frontCommand", "land");
           }}
         >
           착륙
@@ -78,28 +89,32 @@ function Controller() {
       <div>
         <STLRbutton
           onClick={() => {
-            setLastCommand("Turn Left");
+            setLastCommand("Turn Left 15º ");
+            socket.emit("frontCommand", "ccw 20");
           }}
         >
           좌회전
         </STLRbutton>
         <SGFBbutton
           onClick={() => {
-            setLastCommand("Go Foward");
+            setLastCommand("Go Foward 20");
+            socket.emit("frontCommand", "foward 20");
           }}
         >
           전진
         </SGFBbutton>
         <STLRbutton
           onClick={() => {
-            setLastCommand("Turn Right");
+            setLastCommand("Turn Right 15º ");
+            socket.emit("frontCommand", "cw 20");
           }}
         >
           우회전
         </STLRbutton>
         <SUDbutton
           onClick={() => {
-            setLastCommand("Up");
+            setLastCommand("Up 20");
+            socket.emit("frontCommand", "up 20");
           }}
         >
           상승
@@ -108,7 +123,8 @@ function Controller() {
       <div>
         <SGLRbutton
           onClick={() => {
-            setLastCommand("Go Left");
+            setLastCommand("Go Left 20");
+            socket.emit("frontCommand", "left 20");
           }}
         >
           좌측이동
@@ -116,13 +132,15 @@ function Controller() {
         <SEbutton
           onClick={() => {
             setLastCommand("Emergency");
+            socket.emit("frontCommand", "emergency");
           }}
         >
           비상정지
         </SEbutton>
         <SGLRbutton
           onClick={() => {
-            setLastCommand("Go Right");
+            setLastCommand("Go Right 20");
+            socket.emit("frontCommand", "right 20");
           }}
         >
           우측이동
@@ -133,13 +151,15 @@ function Controller() {
         <SFLRbutton
           onClick={() => {
             setLastCommand("Flip Left");
+            socket.emit("frontCommand", "flip l");
           }}
         >
           좌측플립
         </SFLRbutton>
         <SGFBbutton
           onClick={() => {
-            setLastCommand("Go Back");
+            setLastCommand("Go Back 20");
+            socket.emit("frontCommand", "back 20");
           }}
         >
           후진
@@ -147,19 +167,21 @@ function Controller() {
         <SFLRbutton
           onClick={() => {
             setLastCommand("Flip Right");
+            socket.emit("frontCommand", "flip r");
           }}
         >
           우측플립
         </SFLRbutton>
         <SUDbutton
           onClick={() => {
-            setLastCommand("Down");
+            setLastCommand("Down 20");
+            socket.emit("frontCommand", "down 20");
           }}
         >
           하강
         </SUDbutton>
       </div>
-      <p>마지막 명령 : "{lastCommand}"</p>
+      <p>마지막 명령 : {lastCommand}</p>
     </Scontroller>
   );
 }

@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { io } from "socket.io-client";
+
+const socket = io("ws://localhost:3003");
 
 const SCheckBox = styled.input`
   appearance: none;
@@ -60,8 +63,12 @@ function Toggle() {
     <SCheckBox
       onChange={() => {
         setIsDark((prev) => {
-          if (prev === 0) return 1;
-          if (prev === 1) return 0;
+          if (prev === 0) {
+            socket.emit("frontCommand", "command");
+            return 1;
+          } else {
+            return 1;
+          }
         });
       }}
       type={"checkbox"}

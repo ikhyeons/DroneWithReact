@@ -11,7 +11,7 @@ locaddr = (host, port)
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 tello_address = ('192.168.10.1', 8889)  #텔로 8889 포트
-server_address = ('127.0.0.1', 3001) #웹 백 포트
+server_address = ('127.0.0.1', 3004) #웹 백 포트
 sock.bind(locaddr) #파이썬 소켓 9000포트
 
 #나중에 웹 연결이 끝나면 메인 루프로 변경할 것.
@@ -24,7 +24,7 @@ def recv():  # 데이터 받기
             data, server = sock.recvfrom(2024);
             print(data.decode(encoding="utf-8"), server, 'this')
             #데이터를 받은 후 다시 내보냄
-            sent2 = sock.sendto(data, server_address);
+            sock.sendto(data, server_address);
         except Exception:
             print('\nExit . . . . \n')
             break
