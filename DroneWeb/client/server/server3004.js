@@ -20,7 +20,7 @@ const dserver = dgram.createSocket("udp4");
 //클라이언트로부터 메시지 수신 시
 dserver.on("message", (msg, remote_info) => {
   console.log(
-    `dserver got: ${msg} from ${remote_info.address}:${remote_info.port}`
+    `dserver got: ${msg.toString("utf8")} from ${remote_info.address}:${remote_info.port}`
   );
 });
 
