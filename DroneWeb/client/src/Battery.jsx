@@ -33,14 +33,14 @@ const Ydiv = styled.div`
 `;
 
 function Battery(prop) {
-  const { status, battery } = prop;
+  const { status } = prop;
 
   return (
     <Sdiv>
       <div>
-        <p>배터리 양 : {battery}</p>
+        <p>배터리 양 : {status.battery}</p>
         <Sbox>
-          <Sgage battery={battery}></Sgage>
+          <Sgage battery={status.battery}></Sgage>
         </Sbox>
       </div>
 

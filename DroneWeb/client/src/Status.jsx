@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import Battery from "./Battery";
 
 function Status(prop) {
-  const { status, battery } = prop;
+  const { status, setStatus } = prop;
+
   return (
     <div
       style={{
@@ -17,7 +18,7 @@ function Status(prop) {
         <p>현재 각도 : {status.yaw}</p>
         <p>높이 : {status.height}</p>
       </div>
-      <Battery battery={battery} status={status} />
+      <Battery status={status} />
     </div>
   );
 }
