@@ -92,6 +92,7 @@ def video_onoff():
         video_thread.start()
         video_on = False
     else:
+        client_socket.sendto('streamoff'.encode('utf-8'), tello_address)
         video_on = True
 
 

@@ -98,7 +98,7 @@ function Controller() {
         <SGFBbutton
           onClick={() => {
             setLastCommand('Go Forward 40')
-            socket.emit('frontCommand', 'forward 40')
+            socket.emit('frontCommand', 'forward 120')
           }}
         >
           전진
@@ -114,7 +114,7 @@ function Controller() {
         <SUDbutton
           onClick={() => {
             setLastCommand('Up 40')
-            socket.emit('frontCommand', 'up 40')
+            socket.emit('frontCommand', 'up 150')
           }}
         >
           상승

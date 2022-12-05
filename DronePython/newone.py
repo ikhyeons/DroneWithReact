@@ -7,19 +7,19 @@ import av
 
 print('\r\n\r\n파일 시작 됨.\r\n')
 
-# def videoRecorder():
-#     video = cv2.VideoCapture('udp://0.0.0.0:11111', cv2.CAP_FFMPEG)
-#     # create a VideoWrite object, recoring to ./video.avi
-#     if not video.isOpened():
-#         video.open('udp://0.0.0.0:11111')  # 만약에 꺼져있으면 새로 키고, 켜져있으면 그대로 놔둠.
-#
-#     while True:
-#         ret, img = video.read()  # capture의 내용 ret는 성공적으로 데이터를 받았는가?, frame은 데이터의 값(2차원 배열의 형태)
-#         if (ret):
-#             cv2.imshow('drone', img)
-#         if cv2.waitKey(1) & 0xFF == ord('q'):  # 영상 화면을 끄기위한 코드 영상화면에서 q를 반복문을 종료하고 꺼짐.
-#             break
-#     video.release()
+def videoRecorder():
+    video = cv2.VideoCapture('udp://0.0.0.0:11111', cv2.CAP_FFMPEG)
+    # create a VideoWrite object, recoring to ./video.avi
+    if not video.isOpened():
+        video.open('udp://0.0.0.0:11111')  # 만약에 꺼져있으면 새로 키고, 켜져있으면 그대로 놔둠.
+
+    while True:
+        ret, img = video.read()  # capture의 내용 ret는 성공적으로 데이터를 받았는가?, frame은 데이터의 값(2차원 배열의 형태)
+        if (ret):
+            cv2.imshow('drone', img)
+        if cv2.waitKey(1) & 0xFF == ord('q'):  # 영상 화면을 끄기위한 코드 영상화면에서 q를 반복문을 종료하고 꺼짐.
+            break
+    video.release()
 
 
 
@@ -34,8 +34,8 @@ sock.bind(locaddr) #파이썬 소켓 9000포트
 
 
 # 리시브 쓰레드 생성=
-# stream = threading.Thread(target=videoRecorder , daemon=True)
-# stream.start()
+stream = threading.Thread(target=videoRecorder , daemon=True)
+stream.start()
 
 while True: #데이터 보내기
     try:
