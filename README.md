@@ -17,5 +17,6 @@ Reference /
 ------
 캡디 종료
 
+5초 정도 기다리면 영상이 생깁니다.
 완성 영상
 <img src="./images/tello.gif" />
