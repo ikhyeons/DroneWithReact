@@ -16,3 +16,6 @@ Reference /
    * 드론 영상 코덱을 못찾아서 실패 / python GUI 커트롤러 생성 / 12. 5
 ------
 캡디 종료
+
+완성 영상
+<img src="./images/tello.gif" />
